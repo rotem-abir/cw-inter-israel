@@ -57,7 +57,6 @@ export function propDataset_currentIndexChanged() {
 	noResults();
 }
 
-
 // ENGLISH
 
 export function loadMoreButtonEN_click(event) {
@@ -72,7 +71,6 @@ export function propertiesRepeater_itemRemoved(itemData) {
 	isMoreButton();
 }
 
-
 // HEBREW
 
 export function loadMoreButtonHE_click(event) {
@@ -86,112 +84,3 @@ export function propertiesRepeaterHE_itemReady($item, itemData, index) {
 export function propertiesRepeaterHE_itemRemoved(itemData) {
 	isMoreButton();
 }
-
-
-/*
-import wixWindow from 'wix-window';
-
-$w.onReady(function () {
-	
-	let myLang = wixWindow.multilingual.currentLanguage; 
-  	if (myLang === 'en') {
-		  $w('#researchStockHE').hide();
-		  $w('#researchStockEN').show();
-	}
-	else if (myLang === "he") {
-		$w('#researchStockEN').hide();
-		$w('#researchStockHE').show();
-	}
-
-});
-
-let pageSize = 3;
-function isMoreButton() {
-	let count = $w("#propDataset").getTotalCount();
-	if (pageSize >= count) {
-		$w("#loadMoreButtonEN").hide();
-	}
-	else {
-		$w("#loadMoreButtonEN").show();
-	}
-}
-
-export function loadMoreButtonEN_click(event) {
-	pageSize += 3;
-	$w("#propDataset").setPageSize(pageSize);
-}
-
-export function propertiesRepeater_itemReady($item, itemData, index) {
-	isMoreButton();
-}
-
-export function propertiesRepeater_itemRemoved(itemData) {
-	isMoreButton();
-}
-
-function resetPageSize() {
-	pageSize = 3;
-	$w("#propDataset").setPageSize(pageSize);
-}
-
-export function dropdownSize_focus(event) {
-	resetPageSize();
-}
-
-export function dropdownArea_focus(event) {
-	resetPageSize();
-}
-
-export function dropdownType_focus(event) {
-	resetPageSize(); 
-}
-
-*/
-
-
-
-
-
-
-
-/*
-
-import wixWindow from 'wix-window';
-
-let totalPageCount;
-
-
-$w.onReady(function () {
-	/*
-	let myLang = wixWindow.multilingual.currentLanguage; 
-  	if (myLang === 'en') {
-		  $w('#researchStockHE').hide();
-		  $w('#researchStockEN').show();
-	}
-	else if (myLang === "he") {
-		$w('#researchStockEN').hide();
-		$w('#researchStockHE').show();
-	}*
-	/
-	$w("#propDataset").onReady( () => {
-		totalPageCount = $w("#propDataset").getTotalPageCount();
-	});
-});
-
-export function loadMoreButtonEN_click(event) {
-	$w("#propDataset").loadMore()
-	.then( () => {
-		moreButton();
-	});
-}
-
-// moreButton() needs to be called for every repeater change
-
-function moreButton() {
-	let pageCount = $w("#propDataset").getCurrentPageIndex();
-	if (pageCount === totalPageCount) {
-		$w("#loadMoreButtonEN").hide();
-	}
-}
-
-*/

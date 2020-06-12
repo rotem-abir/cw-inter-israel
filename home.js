@@ -1,19 +1,19 @@
 import wixWindow from 'wix-window';
 
 let dropOptionsEN = [
-	{"label": 'Real Estate Consultants', "value": "Consulting", "url": "/our-services"},
+	{"label": 'Real Estate Consultants', "value": "Consulting", "url": "/services/Occupier-Services"},
 	{"label": "Property for rent", "value": "Rent", "url": "/properties"},
 	{"label": "Tenants for my property", "value": "Tenant", "url": "/contact-us"},
-	{"label": "Sale or Purchase of property", "value": "Capital markets)", "url": "/services/Occupier-Services"},
+	{"label": "Sale or Purchase of property", "value": "Capital markets)", "url": "/services/Capital-Markets"},
 	{"label": "Insights on markets and trends", "value": "Insights", "url": "/market-research"},
 	{"label": "Career opportunities", "value": "Career", "url": "/careers"},
 ];
 
 let dropOptionsHE = [
-	{"label": 'ייעוץ נדל"ני', "value": "Consulting", "url": "/our-services?lang=he"},
+	{"label": 'ייעוץ נדל"ני', "value": "Consulting", "url": "/services/Occupier-Services?lang=he"},
 	{"label": "משרד להשכרה", "value": "Rent", "url": "/properties?lang=he"},
 	{"label": "מציאת שוכר/ת למשרד שלי", "value": "Tenant", "url": "/contact-us?lang=he"},
-	{"label": "רכישה או מכירה של נכס מניב", "value": "Capital markets)", "url": "/services/Occupier-Services?lang=he"},
+	{"label": "רכישה או מכירה של נכס מניב", "value": "Capital markets)", "url": "/services/Capital-Markets?lang=he"},
 	{"label": "מידע על מצב השוק", "value": "Insights", "url": "/market-research?lang=he"},
 	{"label": "פיתוח הקריירה שלי", "value": "Career", "url": "/careers?lang=he"},
 ];
@@ -42,7 +42,7 @@ $w.onReady(function () {
 	})
 
 	$w("#serviceButtonRight2").onClick((event) => {
-		$w("#servicesSlideshow").next();
+	$w("#servicesSlideshow").next();
 	})
 
 	$w("#serviceButtonLeft2").onClick((event) => {

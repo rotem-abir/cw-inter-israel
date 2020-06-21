@@ -1,9 +1,4 @@
 import wixData from 'wix-data';
-/*
-function setButtonColor(button) {
-  button.style.color = "#000000";
-}
-*/
 
 let infoData;
 
@@ -33,11 +28,6 @@ $w.onReady(function () {
     }
   };
 });
-
-/*
-let but = $w('#buttonAbout');
-setButtonColor(but);
-*/
 
 function skipInfo(num) {
   for (let i=1; i<4; i++) {

@@ -3,6 +3,7 @@ import wixData from 'wix-data';
 let infoData;
 
 $w.onReady(function () {
+
   $w('#dynamicDataset').onReady( () => {
     let position = $w('#dynamicDataset').getCurrentItem().positionEn;
     let department = $w('#dynamicDataset').getCurrentItem().departmentEn;
@@ -11,6 +12,10 @@ $w.onReady(function () {
     if (department === "Executive Management") {
       $w('#achieveTitleEN').show();
     }
+    else if ((position === 'Business Development')||(position === 'Accountant')) {
+      $w('#navigationBar').hide();
+    }
+    //$w('#profileImage').show();
   });
 
   infoData = {
@@ -27,6 +32,7 @@ $w.onReady(function () {
       info: $w('#responsEN')
     }
   };
+
 });
 
 function skipInfo(num) {

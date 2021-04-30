@@ -2,15 +2,17 @@ import wixLocation from 'wix-location';
 
 $w.onReady(function () {
 
-    let propertyUrl = $w("#dynamicDataset").getCurrentItem().url;
+	let propertyName = $w("#dynamicDataset").getCurrentItem().title;
+    let propertyUrl = $w("#dynamicDataset").getCurrentItem().url + '?lang=he';
     let brochureUrl = $w("#dynamicDataset").getCurrentItem().qr;
-	setTimeout(() => { $w('#description').text = 'Brochure download is ready'; }, 500);
+
+	setTimeout(() => { $w('#description').text = propertyName; }, 500);
 
 	if(brochureUrl) {
     	wixLocation.to(brochureUrl);
-		setTimeout(() => { wixLocation.to(propertyUrl);	}, 2000);
+		setTimeout(() => { wixLocation.to(propertyUrl);	}, 2000); // if brochure doensnt load
 	}
 	else {
-		wixLocation.to(propertyUrl);
+		wixLocation.to(propertyUrl); // if there's no brochure
 	}
 });

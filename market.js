@@ -5,8 +5,8 @@ let num;
 $w.onReady(function () {
 	let myLang = wixWindow.multilingual.currentLanguage; 
   	if (myLang === 'en') {
-		  $w('#researchStockHE').hide();
-		  $w('#researchStockEN').show();
+		$w('#researchStockHE').hide();
+		$w('#researchStockEN').show();
 	}
 	else if (myLang === "he") {
 		$w('#researchStockEN').hide();
@@ -16,7 +16,7 @@ $w.onReady(function () {
 });
 
 export function loadMoreButton_click(event) {
-	num += 6
+	num += 3
 	$w("#researchDataset").setPageSize(num)
 	.then( () => {
 		if (num > 10) {
@@ -26,7 +26,7 @@ export function loadMoreButton_click(event) {
 }
 
 export function loadMoreButtonHE_click(event) {
-	num += 6
+	num += 3
 	$w("#researchDataset").setPageSize(num)
 	.then( () => {
 		if (num > 10) {

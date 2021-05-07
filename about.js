@@ -1,19 +1,6 @@
 import wixWindow from 'wix-window';
 import wixData from 'wix-data';
 
-$w.onReady(function () {
-    let myLang = wixWindow.multilingual.currentLanguage; 
-  	if (myLang === 'en') {
-		  $w('#ourTeamHE').hide();
-		  $w('#ourTeamEN').show();
-	}
-	else if (myLang === "he") {
-		$w('#ourTeamEN').hide();
-		$w('#ourTeamHE').show();
-	}
-    filter('III')
-});
-
 let debounceTimer;
 let lastSearchValue;
 
@@ -47,6 +34,19 @@ function filterInside(searchValue) {
     );
 }
 
+$w.onReady(function () {
+    let myLang = wixWindow.multilingual.currentLanguage; 
+  	if (myLang === 'en') {
+		  $w('#ourTeamHE').hide();
+		  $w('#ourTeamEN').show();
+	}
+	else if (myLang === "he") {
+		$w('#ourTeamEN').hide();
+		$w('#ourTeamHE').show();
+	}
+    filter('III')
+});
+
 export function aboutDataset_currentIndexChanged() {
 	let count = $w("#aboutDataset").getTotalCount();
     //console.log(count + " results for " + lastSearchValue);
@@ -54,6 +54,7 @@ export function aboutDataset_currentIndexChanged() {
         filterInside(lastSearchValue);
     }
 }
+
 
 // ENGLISH
 
@@ -70,12 +71,7 @@ export function aboutSearchInput_keyPress(event) {
 export function phoneButton_click(event) {
     let $item = $w.at(event.context);
     $item("#switchEmail").hide();
-    if( $item("#switchPhone").isVisible ) {
-	    $item("#switchPhone").hide();
-    }
-    else {
-       	$item("#switchPhone").show();
-    }
+	$item("#switchPhone").show();
 }
 
 export function emailButton_mouseIn(event) {
@@ -105,12 +101,7 @@ export function aboutSearchInputHE_keyPress(event) {
 export function phoneButtonHE_click(event) {
     let $item = $w.at(event.context);
     $item("#switchEmailHE").hide();
-    if( $item("#switchPhoneHE").isVisible ) {
-	    $item("#switchPhoneHE").hide();
-    }
-    else {
-       	$item("#switchPhoneHE").show();
-    } 
+    $item("#switchPhoneHE").show();
 }
 
 export function emailButtonHE_mouseIn(event) {

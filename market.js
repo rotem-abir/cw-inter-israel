@@ -13,6 +13,26 @@ $w.onReady(function () {
 		$w('#researchStockHE').show();
 	}
 	num = 3;
+
+	$w('#researchDataset').onReady( () => {
+		if (myLang === 'en') {
+			$w('#marketRepeater').onItemReady( ($w, itemData) => {
+				let isPdf = itemData.interNews;
+				if (!isPdf) {
+					$w('#marketCardImage').link = $w('#marketCardTitle').link = itemData.magazineEn;
+				}
+			});
+		}
+		else if (myLang === 'he') {
+			$w('#marketRepeaterHe').onItemReady( ($w, itemData) => {
+				let isPdf = itemData.interNewsHe;
+				if (!isPdf) {
+					$w('#marketCardImageHe').link = $w('#marketCardTitleHe').link = itemData.magazineHe;
+				}
+			});
+		}
+	});
+
 });
 
 export function loadMoreButton_click(event) {

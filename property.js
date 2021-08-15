@@ -4,6 +4,8 @@ import wixLocation from 'wix-location';
 
 let myLang;
 let mobile;
+let fixFont;
+
 $w.onReady(function () {
 
     myLang = wixWindow.multilingual.currentLanguage;
@@ -11,32 +13,41 @@ $w.onReady(function () {
     if (isHidden === undefined) {
         wixLocation.to("/properties");   
     }
-    else if (isHidden === 999) {
+    else if (isHidden > 555) {
         if (myLang === 'en') {
             $w('#soldEN').show()
+            if (isHidden === 777) {
+                $w('#soldEN').text = "FULLY LET";   
+            }
         }
         else {
             $w('#soldHE').show()
+            if (isHidden === 777) {
+                $w('#soldHE').text = "שווק במלואו";   
+            }
         }
     }
-
+    
+    let isBrouchure;
   	if (myLang === 'en') {
-		  $w('#ListStripHE').hide();
-		  $w('#ListStripEN').show();
+		$w('#ListStripHE').hide();
+		$w('#ListStripEN').show();
+        isBrouchure = $w("#dynamicDataset").getCurrentItem().brochure;
 	}
 	else if (myLang === "he") {
 		$w('#ListStripEN').hide();
 		$w('#ListStripHE').show();
-	}
-
-	let person = $w("#dynamicDataset").getCurrentItem().contact;
-    filter(person);
-    
-    let isBrouchure = $w("#dynamicDataset").getCurrentItem().brochure;
+        isBrouchure = $w("#dynamicDataset").getCurrentItem().brochureHe;
+        //fixFont = $w('#textOccHe').html;
+        //console.log(fixFont);
+	}   
     if (isBrouchure === undefined) {
          $w('#brochureButton').hide();
          $w('#brochureButtonHE').hide();
     }
+
+	let person = $w("#dynamicDataset").getCurrentItem().contact;
+    filter(person);
 });
 
 function filter(searchValue) {

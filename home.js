@@ -1,6 +1,6 @@
 import wixWindow from 'wix-window';
 
-let dropOptionsEN = [
+const dropOptionsEN = [
 	{"label": 'Real Estate Consultants', "value": "Consulting", "url": "/services/Occupier-Services"},
 	{"label": "Property for rent", "value": "Rent", "url": "/properties"},
 	{"label": "Tenants for my property", "value": "Tenant", "url": "/contact-us"},
@@ -9,7 +9,7 @@ let dropOptionsEN = [
 	{"label": "Career opportunities", "value": "Career", "url": "/careers"},
 ];
 
-let dropOptionsHE = [
+const dropOptionsHE = [
 	{"label": 'ייעוץ נדל"ני', "value": "Consulting", "url": "/services/Occupier-Services?lang=he"},
 	{"label": "משרד להשכרה", "value": "Rent", "url": "/properties?lang=he"},
 	{"label": "מציאת שוכר/ת למשרד שלי", "value": "Tenant", "url": "/contact-us?lang=he"},
@@ -27,10 +27,15 @@ $w.onReady(function () {
   	if (myLang === 'en') {
 		$w('#howToHelpDropdown').show();
 		$w('#howToHelpDropdownHE').hide();
+		$w('#repeaterEN').show();
+		$w('#repeaterHE').hide();
 	}
 	else if (myLang === "he") {
 		$w('#howToHelpDropdownHE').show();
 		$w('#howToHelpDropdown').hide();
+		$w('#repeaterHE').show();
+		$w('#repeaterEN').hide();
+		
 	}
 
 	$w("#serviceButtonRight1").onClick((event) => {

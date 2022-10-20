@@ -3,83 +3,98 @@ import wixWindow from 'wix-window';
 import wixLocation from 'wix-location';
 
 let myLang;
-let servicesSlide = [];
-let itemOrder;
+let servicesSlide = [1,2,3,4,5,6,7,8];
+let marker;
+let servArr = [];
+let tempMarker;
 
 function filter(searchValue) {
     $w('#contactDataset').setFilter(wixData.filter().contains('filter', searchValue));
 }
 
-function loadServices(num) {
-	for (let i=0; i<3; i++) {
-		servicesSlide[i] = num + i + 1;
-		if (servicesSlide[i] > 7) {
-			servicesSlide[i] -= 7;	
+function createTrio(num) {
+	let tempArr = [];
+	for (let i=1; i<=3; i++) {
+		let pushNum = num + i;
+		if(pushNum > servicesSlide.length) {
+			pushNum -= servicesSlide.length;
 		}
-		else if (servicesSlide[i] < 1) {
-			servicesSlide[i] += 7;	
-		}
-		servicesSlide[i] = servicesSlide[i].toString();
+		tempArr.push(pushNum.toString());
 	}
-	//console.log(servicesSlide);
+	servArr = tempArr;
+	return tempArr[2];
+}
+
+function scrollServices(arr) {
+	for (let i=0; i<3; i++) {
+		arr[i] = arr[i].toString();
+	}
 	$w('#servicesDataset').setFilter( wixData.filter()
-		.hasSome("order", servicesSlide)
-	);
+		.hasSome("order", arr)
+		);
+	console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
 }
 
 $w.onReady(function () {
-
 	myLang = wixWindow.multilingual.currentLanguage; 
   	if (myLang === 'en') {
 		  $w('#serviceHE').hide();
 		  $w('#contactStripHE').hide();
 		  $w('#serviceEN').show();
-		  $w('#contactStripEN').show();
-		  
+		  $w('#contactStripEN').show();  
 	}
 	else if (myLang === "he") {
 		$w('#serviceEN').hide();
 		$w('#contactStripEN').hide();
 		$w('#serviceHE').show();
 		$w('#contactStripHE').show();
-		$w('#moreServicesEN').hide();	// fix multilingual feature
+		$w('#moreServicesEN').hide();	// 1.4 - fix multilingual feature
 	}
 
 	$w("#dynamicDataset").onReady( () => {
 		let str = $w("#serviceTitle").text.toUpperCase();
 		$w("#serviceTitle").text = str;
-
+		
 		let person = $w("#dynamicDataset").getCurrentItem().contact;
-		filter(person);
+		$w("#contactDataset").onReady( () => {
+			filter(person);
+		});
 	});
 	
-	itemOrder = $w('#dynamicDataset').getCurrentItem().order;
-	itemOrder = parseInt(itemOrder, 10);
+	marker = $w('#dynamicDataset').getCurrentItem().order;
+	marker = parseInt(marker, 10); // NEEDED?
+	tempMarker = createTrio(marker);
+	scrollServices(servArr);
+	
 
 	$w("#serviceButtonRight1").onClick( (event) => {
-		//console.log("before: " + itemOrder);
-		loadServices(itemOrder);
-		itemOrder += 3;
-		if (itemOrder > 7) itemOrder -= 7;
-		//console.log("after: " + itemOrder);
+		tempMarker = createTrio(tempMarker);
+		scrollServices(servArr);
 	});
-
 	$w("#serviceButtonLeft1").onClick((event) => {
-		//console.log("before: " + itemOrder);
-		loadServices(itemOrder - 6);
-		itemOrder -= 3;
-		if (itemOrder <= 0) itemOrder += 7;
-		//console.log("after: " + itemOrder);
+		let backwards = tempMarker - 6 + servicesSlide.length;
+		tempMarker = createTrio(backwards);
+		scrollServices(servArr);
 	})
-
 });
 
+function createWhatsup(wasup) {
+    wasup = wasup.slice(1, 12);
+    wasup = wasup.split("-");
+    wasup = 'https://wa.me/972' + wasup[0]+wasup[1]+wasup[2];
+    return wasup;
+}
+
 export function contactDataset_currentIndexChanged() {
+	let mobile = $w('#contactDataset').getCurrentItem().mobile;
+    let wasuplink = createWhatsup(mobile);
 	if (myLang === 'en') {
-	    $w('#aboutCardEN').show();
+	    $w('#aboutTeamRepeaterEN').show();
+		$w("#whatsappButtonEN").link = wasuplink;
     }
     else {
-        $w('#aboutCardHE').show();
+        $w('#aboutTeamRepeaterHE').show();
+		$w("#whatsappButtonHE").link = wasuplink;
     }
 }
 
@@ -108,6 +123,7 @@ export function aboutCardEN_mouseOut(event) {
     $item("#switchEmailEN").hide();
 }
 
+
 // HEBREW
 
 export function phoneButtonHE_click(event) {
@@ -132,3 +148,20 @@ export function aboutCardHE_mouseOut(event) {
     $item("#switchPhoneHE").hide();
     $item("#switchEmailHE").hide();
 }
+
+
+
+
+
+/*
+marker = createTrio(tempMarker);
+console.log(marker);
+while (tempMarker !== marker) {
+	marker = createTrio(marker);
+	console.log(marker);
+}
+*/
+
+//console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
+//console.log("servArr: " + servArr + ", marker: " + marker);
+//servicesSlide = servicesSlide.filter(item => item !== servieNr);

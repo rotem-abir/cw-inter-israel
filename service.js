@@ -6,7 +6,6 @@ let myLang;
 let servicesSlide = [1,2,3,4,5,6,7,8];
 let marker;
 let servArr = [];
-let tempMarker;
 
 function filter(searchValue) {
     $w('#contactDataset').setFilter(wixData.filter().contains('filter', searchValue));
@@ -19,7 +18,7 @@ function createTrio(num) {
 		if(pushNum > servicesSlide.length) {
 			pushNum -= servicesSlide.length;
 		}
-		tempArr.push(pushNum.toString());
+		tempArr.push(pushNum);
 	}
 	servArr = tempArr;
 	return tempArr[2];
@@ -31,8 +30,8 @@ function scrollServices(arr) {
 	}
 	$w('#servicesDataset').setFilter( wixData.filter()
 		.hasSome("order", arr)
-		);
-	console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
+	);
+	//console.log("marker: " + marker + ", servArr:" + servArr);
 }
 
 $w.onReady(function () {
@@ -48,7 +47,7 @@ $w.onReady(function () {
 		$w('#contactStripEN').hide();
 		$w('#serviceHE').show();
 		$w('#contactStripHE').show();
-		$w('#moreServicesEN').hide();	// 1.4 - fix multilingual feature
+		$w('#moreServicesEN').hide();	// 1.4 fix multilingual feature
 	}
 
 	$w("#dynamicDataset").onReady( () => {
@@ -63,20 +62,21 @@ $w.onReady(function () {
 	
 	marker = $w('#dynamicDataset').getCurrentItem().order;
 	marker = parseInt(marker, 10); // NEEDED?
-	tempMarker = createTrio(marker);
+	marker = createTrio(marker);
 	scrollServices(servArr);
-	
 
 	$w("#serviceButtonRight1").onClick( (event) => {
-		tempMarker = createTrio(tempMarker);
+		marker = createTrio(marker);
 		scrollServices(servArr);
 	});
+	
 	$w("#serviceButtonLeft1").onClick((event) => {
-		let backwards = tempMarker - 6 + servicesSlide.length;
-		tempMarker = createTrio(backwards);
+		let backwards = marker - 6 + servicesSlide.length;
+		marker = createTrio(backwards);
 		scrollServices(servArr);
 	})
 });
+
 
 function createWhatsup(wasup) {
     wasup = wasup.slice(1, 12);
@@ -123,7 +123,6 @@ export function aboutCardEN_mouseOut(event) {
     $item("#switchEmailEN").hide();
 }
 
-
 // HEBREW
 
 export function phoneButtonHE_click(event) {
@@ -148,20 +147,3 @@ export function aboutCardHE_mouseOut(event) {
     $item("#switchPhoneHE").hide();
     $item("#switchEmailHE").hide();
 }
-
-
-
-
-
-/*
-marker = createTrio(tempMarker);
-console.log(marker);
-while (tempMarker !== marker) {
-	marker = createTrio(marker);
-	console.log(marker);
-}
-*/
-
-//console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
-//console.log("servArr: " + servArr + ", marker: " + marker);
-//servicesSlide = servicesSlide.filter(item => item !== servieNr);

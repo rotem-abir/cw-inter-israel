@@ -3,9 +3,10 @@ import wixWindow from 'wix-window';
 import wixLocation from 'wix-location';
 
 let myLang;
-let servicesSlide = [1,2,3,4,5,6,7,8];
+let servicesSlide = [1,2,3,4,5,6,7];
 let marker;
 let servArr = [];
+let tempMarker;
 
 function filter(searchValue) {
     $w('#contactDataset').setFilter(wixData.filter().contains('filter', searchValue));
@@ -25,13 +26,10 @@ function createTrio(num) {
 }
 
 function scrollServices(arr) {
-	for (let i=0; i<3; i++) {
-		arr[i] = arr[i].toString();
-	}
 	$w('#servicesDataset').setFilter( wixData.filter()
 		.hasSome("order", arr)
 	);
-	//console.log("marker: " + marker + ", servArr:" + servArr);
+	// console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
 }
 
 $w.onReady(function () {
@@ -62,21 +60,20 @@ $w.onReady(function () {
 	
 	marker = $w('#dynamicDataset').getCurrentItem().order;
 	marker = parseInt(marker, 10); // NEEDED?
-	marker = createTrio(marker);
+	tempMarker = createTrio(marker);
 	scrollServices(servArr);
 
 	$w("#serviceButtonRight1").onClick( (event) => {
-		marker = createTrio(marker);
+		tempMarker = createTrio(tempMarker);
 		scrollServices(servArr);
 	});
 	
 	$w("#serviceButtonLeft1").onClick((event) => {
-		let backwards = marker - 6 + servicesSlide.length;
-		marker = createTrio(backwards);
+		let backwards = tempMarker - 6 + servicesSlide.length;
+		tempMarker = createTrio(backwards);
 		scrollServices(servArr);
 	})
 });
-
 
 function createWhatsup(wasup) {
     wasup = wasup.slice(1, 12);

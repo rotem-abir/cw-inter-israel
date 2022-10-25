@@ -29,23 +29,32 @@ function scrollServices(arr) {
 	$w('#servicesDataset').setFilter( wixData.filter()
 		.hasSome("order", arr)
 	);
-	// console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
+	//console.log("temp marker: " + tempMarker + ", marker: " + marker + ", servArr:" + servArr);
 }
 
 $w.onReady(function () {
 	myLang = wixWindow.multilingual.currentLanguage; 
+	marker = $w('#dynamicDataset').getCurrentItem().order;
+	marker = parseInt(marker, 10); // NEEDED?
+
+	tempMarker = createTrio(marker);
+	scrollServices(servArr);
+
   	if (myLang === 'en') {
-		  $w('#serviceHE').hide();
-		  $w('#contactStripHE').hide();
-		  $w('#serviceEN').show();
-		  $w('#contactStripEN').show();  
+		$w('#serviceHE').hide();
+		$w('#contactStripHE').hide();
+		$w('#servicesRepeaterHE').hide();
+		$w('#serviceEN').show();
+		$w('#contactStripEN').show();  
+		$w('#servicesRepeaterEN').show()
 	}
 	else if (myLang === "he") {
 		$w('#serviceEN').hide();
 		$w('#contactStripEN').hide();
+		$w('#servicesRepeaterEN').hide();
 		$w('#serviceHE').show();
 		$w('#contactStripHE').show();
-		$w('#moreServicesEN').hide();	// 1.4 fix multilingual feature
+		$w('#servicesRepeaterHE').show();
 	}
 
 	$w("#dynamicDataset").onReady( () => {
@@ -58,11 +67,6 @@ $w.onReady(function () {
 		});
 	});
 	
-	marker = $w('#dynamicDataset').getCurrentItem().order;
-	marker = parseInt(marker, 10); // NEEDED?
-	tempMarker = createTrio(marker);
-	scrollServices(servArr);
-
 	$w("#serviceButtonRight1").onClick( (event) => {
 		tempMarker = createTrio(tempMarker);
 		scrollServices(servArr);

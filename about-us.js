@@ -1,7 +1,8 @@
 import wixData from 'wix-data';
 import wixWindow from 'wix-window';
 
-let infoData;
+let infoDataEN;
+let infoDataHE;
 
 $w.onReady(function () {
 
@@ -53,7 +54,7 @@ $w.onReady(function () {
     }
   });
 // 1-3 EN , 4-6 HE
-  infoData = {
+  infoDataEN = {
     1: {
       line: $w('#lineAbout'),
       info: $w('#bioAchieveEN')
@@ -64,19 +65,22 @@ $w.onReady(function () {
     },
     3: {
       line: $w('#lineRespons'),
-      info: $w('#responsEN')
-    },
-    4: {
+      info: $w('#responsTextEN')
+    }
+  };
+
+  infoDataHE = {
+    1: {
       line: $w('#lineAboutHE'),
       info: $w('#bioAchieveHE')
     },
-    5: {
+    2: {
       line: $w('#lineSkillsHE'),
       info: $w('#topSkillsHE')
     },
-    6: {
+    3: {
       line: $w('#lineResponsHE'),
-      info: $w('#responsHE')
+      info: $w('#responsTextHE')
     }
   };
 

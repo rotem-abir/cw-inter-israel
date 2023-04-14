@@ -7,8 +7,8 @@ let infoDataHE;
 $w.onReady(function () {
 
   $w('#dynamicDataset').onReady( () => {
-    let position;
-    let department;
+    let position, department;
+    let respons, skills;
     let subTitle;
     let myLang = wixWindow.multilingual.currentLanguage;
 
@@ -17,16 +17,17 @@ $w.onReady(function () {
 		  $w('#teamStripEN').show();
       position = $w('#dynamicDataset').getCurrentItem().positionEn;
       department = $w('#dynamicDataset').getCurrentItem().departmentEn;
+      respons = $w('#dynamicDataset').getCurrentItem().responsEn;
+      skills = $w('#dynamicDataset').getCurrentItem().skillsEn;
       subTitle = position + ' • ' + department;
       $w('#subTitle').text = subTitle;
       if (department === "Executive Management") {
         $w('#achieveTitleEN').show();
       }
-      else if ((position === 'Business Development')||(position === 'Accountant')) {
-        $w('#responEN').hide();
-        $w('#skillsEN').hide();
+      else if (respons == null) {
+        $w('#responsEN').hide();
       }
-      else if ((position === 'Client Relations')) {
+      if (skills == null) {
         $w('#skillsEN').hide();
       }
     }

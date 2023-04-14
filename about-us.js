@@ -25,6 +25,9 @@ $w.onReady(function () {
         $w('#responEN').hide();
         $w('#skillsEN').hide();
       }
+      else if ((position === 'Client Relations')) {
+        $w('#skillsEN').hide();
+      }
     }
 
     else if (myLang === 'he') {

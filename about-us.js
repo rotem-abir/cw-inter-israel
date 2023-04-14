@@ -37,19 +37,17 @@ $w.onReady(function () {
 		  $w('#teamStripHE').show();
       position = $w('#dynamicDataset').getCurrentItem().position;
       department = $w('#dynamicDataset').getCurrentItem().department;
+      respons = $w('#dynamicDataset').getCurrentItem().responsHe;
+      skills = $w('#dynamicDataset').getCurrentItem().skillsHe;
       subTitle = position + ' • ' + department;
       $w('#subTitleHE').text = subTitle;
       if (department === "הנהלה") {
         $w('#achieveTitleHE').show();
       }
-      else if ((position === 'פיתוח עסקי')||(position === 'מנהלת חשבונות')) {
-        $w('#navigationBarHE').hide();
-      }
-      else if (position === 'מנהלת משרד'){
+      else if (respons == null) {
         $w('#buttonResponsHE').hide();
-        $w('#buttonSkillsHE').hide();
       }
-      else if (position === 'קשרי לקוחות'){
+      if (skills == null) {
         $w('#buttonSkillsHE').hide();
       }
     }

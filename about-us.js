@@ -40,8 +40,15 @@ $w.onReady(function () {
       if (department === "הנהלה") {
         $w('#achieveTitleHE').show();
       }
-      else if ((department === 'מחלקת קשרי לקוחות')||(department === 'מחלקת כספים')) {
+      else if ((position === 'פיתוח עסקי')||(position === 'מנהלת חשבונות')) {
         $w('#navigationBarHE').hide();
+      }
+      else if (position === 'מנהלת משרד'){
+        $w('#buttonResponsHE').hide();
+        $w('#buttonSkillsHE').hide();
+      }
+      else if (position === 'קשרי לקוחות'){
+        $w('#buttonSkillsHE').hide();
       }
     }
   });

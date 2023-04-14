@@ -8,7 +8,7 @@ $w.onReady(function () {
 
   $w('#dynamicDataset').onReady( () => {
     let position, department;
-    let respons, skills;
+    let respons, skills, bio;
     let subTitle;
     let myLang = wixWindow.multilingual.currentLanguage;
 
@@ -19,19 +19,23 @@ $w.onReady(function () {
       department = $w('#dynamicDataset').getCurrentItem().departmentEn;
       respons = $w('#dynamicDataset').getCurrentItem().responsEn;
       skills = $w('#dynamicDataset').getCurrentItem().skillsEn;
+      bio = $w('#dynamicDataset').getCurrentItem().bioEn;
       subTitle = position + ' • ' + department;
       $w('#subTitle').text = subTitle;
       if (department === "Executive Management") {
         $w('#achieveTitleEN').show();
       }
-      else if (respons == null) {
+      else if (respons == undefined) {
         $w('#responsEN').hide();
       }
-      if (skills == null) {
+      if (skills == undefined) {
         $w('#skillsEN').hide();
       }
+      if (bio == undefined) {
+        $w('#aboutEN').hide();
+      }
     }
-
+    
     else if (myLang === 'he') {
       $w('#teamStripEN').hide();
 		  $w('#teamStripHE').show();
@@ -39,16 +43,20 @@ $w.onReady(function () {
       department = $w('#dynamicDataset').getCurrentItem().department;
       respons = $w('#dynamicDataset').getCurrentItem().responsHe;
       skills = $w('#dynamicDataset').getCurrentItem().skillsHe;
+      bio = $w('#dynamicDataset').getCurrentItem().bioHe;
       subTitle = position + ' • ' + department;
       $w('#subTitleHE').text = subTitle;
       if (department === "הנהלה") {
         $w('#achieveTitleHE').show();
       }
-      else if (respons == null) {
+      else if (respons == undefined) {
         $w('#buttonResponsHE').hide();
       }
-      if (skills == null) {
+      if (skills == undefined) {
         $w('#buttonSkillsHE').hide();
+      }
+      if (bio == undefined) {
+        $w('#buttonAbouHE').hide();
       }
     }
   });
